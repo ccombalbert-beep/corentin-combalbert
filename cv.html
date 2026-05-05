@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Corentin Combalbert</title>
+    <style>
+        :root {
+            --bg: #f0f2ff;
+            --surface: #ffffff;
+            --text: #0f0c29;
+            --text-muted: #64748b;
+            --border: #e0e7ff;
+            --accent: #7c3aed;
+            --accent-2: #06b6d4;
+            --accent-hover: #6d28d9;
+            --accent-light: #f5f3ff;
+            --gradient: linear-gradient(135deg, #7c3aed, #06b6d4);
+            --gradient-soft: linear-gradient(135deg, #ede9fe, #e0f2fe);
+            --shadow: 0 2px 12px rgba(124,58,237,0.08);
+            --shadow-hover: 0 8px 28px rgba(124,58,237,0.18);
+            --toggle-bg: linear-gradient(135deg, #7c3aed, #06b6d4);
+            --toggle-text: #ffffff;
+            --success: #10b981;
+        }
+
+        [data-theme="dark"] {
+            --bg: #08080f;
+            --surface: rgba(255,255,255,0.04);
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border: rgba(255,255,255,0.08);
+            --accent: #a78bfa;
+            --accent-2: #22d3ee;
+            --accent-hover: #c4b5fd;
+            --accent-light: rgba(124,58,237,0.15);
+            --gradient: linear-gradient(135deg, #a78bfa, #22d3ee);
+            --gradient-soft: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(6,182,212,0.15));
+            --shadow: 0 2px 16px rgba(0,0,0,0.5);
+            --shadow-hover: 0 8px 32px rgba(124,58,237,0.3);
+            --toggle-bg: linear-gradient(135deg, #fbbf24, #f59e0b);
+            --toggle-text: #0f0c29;
+            --success: #34d399;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        [data-theme="dark"] body {
+            background: radial-gradient(ellipse at top left, #1a0533 0%, #08080f 60%);
+        }
+
+        header {
+            background: var(--gradient);
+            padding: 1.75rem 2rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 220px; height: 220px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .header-avatar {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            border: 3px solid rgba(255,255,255,0.5);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-info h1 {
+            font-size: 2rem;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            font-weight: 800;
+        }
+
+        .header-info .tagline {
+            color: rgba(255,255,255,0.75);
+            font-size: 0.88rem;
+            margin-top: 0.25rem;
+        }
+
+        .header-contacts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.85rem;
+        }
+
+        .contact-chip {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 999px;
+            padding: 0.25rem 0.75rem;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .contact-chip:hover {
+            background: rgba(255,255,255,0.28);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        #theme-toggle {
+            padding: 0.5rem 1.1rem;
+            background: rgba(255,255,255,0.18);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        #theme-toggle:hover { background: rgba(255,255,255,0.32); }
+
+        nav {
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            overflow-x: auto;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        [data-theme="dark"] nav {
+            background: rgba(10,10,20,0.85);
+        }
+
+        .tab-btn {
+            padding: 0.9rem 1.3rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .tab-btn:hover { color: var(--accent); }
+        .tab-btn.active {
+            color: var(--accent);
+            border-image: var(--gradient) 1;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        main {
+            max-width: 820px;
+            margin: 2rem auto;
+            padding: 0 1.5rem 3rem;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.25s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+            letter-spacing: 0.02em;
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            backdrop-filter: blur(8px);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .card h3 { font-size: 1rem; color: var(--text); font-weight: 700; }
+
+        .card .date {
+            font-size: 0.76rem;
+            background: var(--gradient);
+            color: #fff;
+            padding: 0.2rem 0.75rem;
+            border-radius: 999px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .card .company {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 0.88rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .card .location {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-left: 0.4rem;
+            -webkit-text-fill-color: var(--text-muted);
+        }
+
+        .card ul { padding-left: 1.1rem; margin-top: 0.5rem; }
+
+        .card ul li {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            margin-bottom: 0.15rem;
+        }
+
+        .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+
+        .tag {
+            background: var(--gradient-soft);
+            color: var(--accent);
+            padding: 0.22rem 0.7rem;
+            border-radius: 999px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            border: 1px solid var(--border);
+        }
+
+        /* ABOUT GRID */
+        .about-intro {
+            background: var(--gradient-soft);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.35rem 1.5rem;
+            margin-bottom: 1.25rem;
+            box-shadow: var(--shadow);
+            font-size: 0.93rem;
+            line-height: 1.75;
+            color: var(--text-muted);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        @media (max-width: 500px) { .about-grid { grid-template-columns: 1fr; } }
+
+        .info-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 0.9rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .info-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+
+        .info-icon { font-size: 1.4rem; }
+
+        .info-item div small {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .info-item div span { font-weight: 700; font-size: 0.88rem; }
+
+        /* SKILLS */
+        .skill-category-label {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin: 1.5rem 0 0.8rem;
+        }
+
+        .skill-item { margin-bottom: 1.1rem; }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.45rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        .skill-bar {
+            height: 9px;
+            background: var(--border);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 999px;
+            width: 0;
+            transition: width 1.1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* LANGUAGES DOTS */
+        .lang-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 500px) { .lang-grid { grid-template-columns: 1fr; } }
+
+        .lang-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1rem 1.1rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s;
+        }
+
+        .lang-card:hover { transform: translateY(-2px); }
+
+        .lang-name { font-weight: 700; font-size: 0.9rem; }
+        .lang-level { font-size: 0.74rem; color: var(--text-muted); margin-top: 0.15rem; }
+        .lang-dots { display: flex; gap: 5px; }
+
+        .dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+
+        .dot.filled {
+            background: var(--gradient);
+            background: var(--accent);
+        }
+
+        /* RÉALISATIONS */
+        .realisation-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 4px solid transparent;
+            border-image: var(--gradient) 1;
+            border-radius: 14px;
+            padding: 1.2rem 1.4rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            backdrop-filter: blur(8px);
+        }
+
+        .realisation-card:hover { transform: translateX(5px); box-shadow: var(--shadow-hover); }
+
+        .realisation-card h3 { font-size: 0.95rem; color: var(--accent); margin-bottom: 0.3rem; font-weight: 700; }
+        .realisation-card p { font-size: 0.87rem; color: var(--text-muted); line-height: 1.65; }
+
+        .stat-big {
+            font-size: 1.7rem;
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.15rem;
+            letter-spacing: -1px;
+        }
+
+        /* FORMATION */
+        .edu-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.1rem 1.4rem;
+            margin-bottom: 0.9rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            transition: transform 0.2s, box-shadow 0.2s;
+            backdrop-filter: blur(8px);
+        }
+
+        .edu-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+
+        .edu-icon { font-size: 1.6rem; margin-top: 0.1rem; flex-shrink: 0; }
+        .edu-card h3 { font-size: 0.95rem; color: var(--text); font-weight: 700; }
+
+        .edu-card .school {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 0.88rem;
+            margin: 0.2rem 0;
+        }
+
+        .edu-card .edu-meta { font-size: 0.8rem; color: var(--text-muted); }
+        .edu-card .edu-detail { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.3rem; font-style: italic; }
+
+        /* CONTACT FORM */
+        .contact-form {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+        }
+
+        .form-group { margin-bottom: 1rem; }
+
+        .form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(124,58,237,0.12);
+        }
+
+        .form-group textarea { resize: vertical; min-height: 110px; }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--gradient);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.15s;
+            letter-spacing: 0.02em;
+        }
+
+        .submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        #form-success {
+            display: none;
+            text-align: center;
+            padding: 1rem;
+            color: var(--success);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* STATS GRID */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 600px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
+
+        .stat-card {
+            background: var(--gradient);
+            border-radius: 16px;
+            padding: 1.1rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-hover);
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover { transform: translateY(-3px); }
+
+        .stat-card .stat-number {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.8);
+            margin-top: 0.35rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* THEMATIC LABEL */
+        .theme-label {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin: 2rem 0 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .theme-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* TIMELINE */
+        .timeline { position: relative; padding-left: 1.5rem; }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px;
+            bottom: 6px;
+            width: 2px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.1rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.83rem;
+            top: 0.9rem;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gradient);
+            border: 2px solid var(--bg);
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+
+        .timeline-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .timeline-card:hover { transform: translateX(4px); box-shadow: var(--shadow-hover); }
+
+        .timeline-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.45rem;
+            flex-wrap: wrap;
+        }
+
+        .timeline-year {
+            font-size: 0.75rem;
+            font-weight: 800;
+            background: var(--gradient);
+            color: #fff;
+            padding: 0.18rem 0.65rem;
+            border-radius: 999px;
+        }
+
+        .timeline-phase {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .timeline-card p {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* FORCES GRID */
+        .forces-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        @media (max-width: 600px) { .forces-grid { grid-template-columns: 1fr; } }
+
+        .force-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.1rem 1.2rem;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .force-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+
+        .force-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+
+        .force-card h3 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.4rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .force-card p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.65; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-left">
+        <img src="Corentin2.jpg" alt="Corentin Combalbert" class="header-avatar">
+        <div class="header-info">
+            <h1>Corentin Combalbert</h1>
+            <div class="tagline">Responsable de Marque · Stratégies Marketing · Communication Digitale · ROI Élevé</div>
+            <div class="header-contacts">
+                <a class="contact-chip" href="tel:+33643263635">📞 +33 6 43 26 36 35</a>
+                <a class="contact-chip" href="mailto:c.combalbert@gmail.com">✉️ c.combalbert@gmail.com</a>
+                <a class="contact-chip" href="https://www.linkedin.com/in/corentin-combalbert/" target="_blank">💼 LinkedIn</a>
+                <a class="contact-chip" href="https://youtu.be/byYOPaXm8UQ" target="_blank">▶️ Vidéo</a>
+                <span class="contact-chip">📍 64 bd Soult, 75012 Paris</span>
+            </div>
+        </div>
+    </div>
+    <button id="theme-toggle">🌙 Dark mode</button>
+</header>
+
+<nav>
+    <button class="tab-btn active" data-tab="about">À propos</button>
+    <button class="tab-btn" data-tab="experience">Expériences</button>
+    <button class="tab-btn" data-tab="skills">Compétences</button>
+    <button class="tab-btn" data-tab="formation">Formation</button>
+    <button class="tab-btn" data-tab="realisations">Réalisations</button>
+    <button class="tab-btn" data-tab="contact">Contact</button>
+</nav>
+
+<main>
+
+    <!-- À PROPOS -->
+    <div class="tab-content active" id="tab-about">
+        <h2 class="section-title">À propos de moi</h2>
+        <div class="about-intro">
+            Expert en marketing et communication avec plus de 10 ans d'expérience dans des environnements exigeants (hôtellerie de luxe, coworking premium, agence). Fondateur d'une agence de communication, Brand Manager ayant généré un ROI de 179% et augmenté le trafic de +320%, et formateur auprès de grandes écoles. Passionné par la stratégie de marque, le SEO/SEA et la création de contenus à fort impact.
+        </div>
+        <div class="about-grid">
+            <div class="info-item">
+                <div class="info-icon">📍</div>
+                <div><small>Localisation</small><span>75012 Paris, France</span></div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">✉️</div>
+                <div><small>Email</small><span>c.combalbert@gmail.com</span></div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">📞</div>
+                <div><small>Téléphone</small><span>+33 6 43 26 36 35</span></div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">🏆</div>
+                <div><small>Certification</small><span>TOEIC 896</span></div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">💼</div>
+                <div><small>LinkedIn</small><span>corentin-combalbert</span></div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">🎓</div>
+                <div><small>Dernier diplôme</small><span>Executive MBA – ISCPA</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXPÉRIENCES -->
+    <div class="tab-content" id="tab-experience">
+        <h2 class="section-title">Expériences professionnelles</h2>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Brand Manager</h3>
+                <span class="date">06/2022 – 2024</span>
+            </div>
+            <div class="company">Deskopolitan <span class="location">📍 Paris</span></div>
+            <ul>
+                <li>Mise en place de la stratégie d'inbound marketing</li>
+                <li>Mise en place du pôle Sales and Marketing</li>
+                <li>Élaboration de la stratégie annuelle et définition du plan marketing et communication</li>
+                <li>Conception et rédaction du plan d'actions et du budget associé</li>
+                <li>Pilotage et optimisation des actions SEO/SEA en collaboration avec l'agence digitale</li>
+                <li>Développement des campagnes d'acquisition et suivi des performances</li>
+                <li>Élaboration et gestion du planning éditorial hebdomadaire</li>
+                <li>Supervision de la production de contenus (graphisme et rédaction)</li>
+                <li>Gestion du site internet</li>
+                <li>Coordination des développements et évolutions avec l'agence digitale</li>
+                <li>Supervision de la création des supports de communication dédiés à l'exploitation</li>
+            </ul>
+            <div class="tags">
+                <span class="tag">Inbound Marketing</span>
+                <span class="tag">SEO / SEA</span>
+                <span class="tag">Stratégie de marque</span>
+                <span class="tag">Content Management</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Fondateur</h3>
+                <span class="date">10/2019 – 06/2022</span>
+            </div>
+            <div class="company">Agence combcom <span class="location">📍 Paris</span></div>
+            <ul>
+                <li>Agence de marketing et communication – 17 clients en contrats annuels</li>
+                <li>Intervenant au CMH auprès de 11 classes de Bachelor à Master 2 en communication et marketing digital</li>
+                <li>Création du parcours d'enseignement de la première année à la 5e</li>
+                <li>Conférencier à la Skema Business School</li>
+                <li>Formateur LinkedIn en entreprise</li>
+            </ul>
+            <div class="tags">
+                <span class="tag">Entrepreneuriat</span>
+                <span class="tag">Marketing Digital</span>
+                <span class="tag">Formation</span>
+                <span class="tag">LinkedIn</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Responsable Marketing et Communication</h3>
+                <span class="date">09/2018 – 10/2019</span>
+            </div>
+            <div class="company">Waldorf Astoria – Trianon Palace <span class="location">📍 Versailles</span></div>
+            <ul>
+                <li>Création de supports de communication</li>
+                <li>Gestion de press events et influenceurs</li>
+                <li>Création de partenariats pour la visibilité de l'hôtel</li>
+                <li>Relation presse</li>
+                <li>Social Media Management</li>
+                <li>Gestion du site internet</li>
+                <li>Gestion des tournages et photo shooting</li>
+            </ul>
+            <div class="tags">
+                <span class="tag">Relations Presse</span>
+                <span class="tag">Social Media</span>
+                <span class="tag">Hôtellerie de luxe</span>
+                <span class="tag">Influenceurs</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Responsable Communication</h3>
+                <span class="date">05/2016 – 09/2018</span>
+            </div>
+            <div class="company">Hotel Executive Solution <span class="location">📍 Paris</span></div>
+            <ul>
+                <li>Création du service Communication</li>
+                <li>Social media management (35 comptes pour 14 hôtels)</li>
+                <li>Mise en place de stratégie de communication annuelle</li>
+                <li>Création de contenu</li>
+                <li>Mise en place et gestion des stratégies emailing</li>
+                <li>Gestion du contenu des différents sites internet</li>
+            </ul>
+            <div class="tags">
+                <span class="tag">Social Media</span>
+                <span class="tag">Emailing</span>
+                <span class="tag">Création de contenu</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Coordinateur Sales and Marketing</h3>
+                <span class="date">11/2015 – 05/2016</span>
+            </div>
+            <div class="company">Courtyard by Marriott <span class="location">📍 Arcueil</span></div>
+            <ul>
+                <li>Responsable du service « Rewards corporate »</li>
+                <li>Mise en place et gestion du « Mois de l'environnement »</li>
+                <li>Audit du département Sales & Marketing</li>
+                <li>Création de contenu</li>
+                <li>Social media management</li>
+            </ul>
+            <div class="tags">
+                <span class="tag">Sales</span>
+                <span class="tag">Marketing</span>
+                <span class="tag">Marriott</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Réceptionniste</h3>
+                <span class="date">07/2014 – 08/2015</span>
+            </div>
+            <div class="company">Beau-Rivage Palace <span class="location">📍 Lausanne, Suisse</span></div>
+            <div class="tags">
+                <span class="tag">Hôtellerie de luxe</span>
+                <span class="tag">Relation client</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="tab-content" id="tab-skills">
+        <h2 class="section-title">Compétences</h2>
+
+        <div class="skill-category-label">Marketing & Communication</div>
+
+        <div class="skill-item">
+            <div class="skill-header"><span>Branding & Positionnement de marque</span><span>95%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-level="95"></div></div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-header"><span>Stratégie Marketing & Communication</span><span>90%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-level="90"></div></div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-header"><span>SEO / SEA</span><span>85%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-level="85"></div></div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-header"><span>Social Media Management</span><span>90%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-level="90"></div></div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-header"><span>Pilotage de la performance & ROI</span><span>85%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-level="85"></div></div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-header"><span>Formation & Ingénierie pédagogique</span><span>80%</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-level="80"></div></div>
+        </div>
+
+        <div class="skill-category-label" style="margin-top:2rem">Langues</div>
+        <div class="lang-grid">
+            <div class="lang-card">
+                <div>
+                    <div class="lang-name">Français</div>
+                    <div class="lang-level">Langue maternelle</div>
+                </div>
+                <div class="lang-dots">
+                    <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+                </div>
+            </div>
+            <div class="lang-card">
+                <div>
+                    <div class="lang-name">Anglais</div>
+                    <div class="lang-level">Compétent · TOEIC 896</div>
+                </div>
+                <div class="lang-dots">
+                    <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+                </div>
+            </div>
+            <div class="lang-card">
+                <div>
+                    <div class="lang-name">Allemand</div>
+                    <div class="lang-level">Intermédiaire</div>
+                </div>
+                <div class="lang-dots">
+                    <div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                </div>
+            </div>
+            <div class="lang-card">
+                <div>
+                    <div class="lang-name">Portugais</div>
+                    <div class="lang-level">Débutant</div>
+                </div>
+                <div class="lang-dots">
+                    <div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORMATION -->
+    <div class="tab-content" id="tab-formation">
+        <h2 class="section-title">Formation</h2>
+
+        <div class="edu-card">
+            <div class="edu-icon">🎓</div>
+            <div>
+                <h3>Executive MBA</h3>
+                <div class="school">ISCPA – Visiplus</div>
+                <div class="edu-meta">📅 2018 – 2019 · 📍 Paris</div>
+                <div class="edu-detail">Stratégie webmarketing et projet de Communication digitale</div>
+            </div>
+        </div>
+
+        <div class="edu-card">
+            <div class="edu-icon">🎓</div>
+            <div>
+                <h3>MBA 1 et 2</h3>
+                <div class="school">Iemi – CMH</div>
+                <div class="edu-meta">📅 2015 – 2017 · 📍 Paris</div>
+                <div class="edu-detail">Major in International Hospitality and Luxury Brand Management</div>
+            </div>
+        </div>
+
+        <div class="edu-card">
+            <div class="edu-icon">🏨</div>
+            <div>
+                <h3>Bachelor of Science de Management Hôtelier</h3>
+                <div class="school">Vatel Paris et Suisse</div>
+                <div class="edu-meta">📅 2011 – 2014 · 📍 Paris & Martigny</div>
+                <div class="edu-detail">Bachelor of Science de management</div>
+            </div>
+        </div>
+
+        <div class="edu-card">
+            <div class="edu-icon">📚</div>
+            <div>
+                <h3>Bac ES</h3>
+                <div class="school">Lycée Teilhard de Chardin</div>
+                <div class="edu-meta">📅 2007 – 2011 · 📍 Saint-Maur-des-Fossés</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RÉALISATIONS -->
+    <div class="tab-content" id="tab-realisations">
+        <h2 class="section-title">Réalisations clés</h2>
+
+        <!-- CHIFFRES CLÉS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">+320%</div>
+                <div class="stat-label">Trafic global</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">179%</div>
+                <div class="stat-label">ROI généré</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">17</div>
+                <div class="stat-label">Clients annuels</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">16</div>
+                <div class="stat-label">Classes formées</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Années chez Deskopolitan</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">35</div>
+                <div class="stat-label">Comptes sociaux gérés</div>
+            </div>
+        </div>
+
+        <!-- TIMELINE DESKOPOLITAN -->
+        <div class="theme-label">📈 Évolution stratégique chez Deskopolitan</div>
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="timeline-header">
+                        <span class="timeline-year">2022 – 2023</span>
+                        <span class="timeline-phase">Phase de Fondation</span>
+                    </div>
+                    <p>Assainissement et structuration de la marque. Lancement de la stratégie Brand Content avec le passage des articles de blog aux "Guides Deskopolitan" pour le SEO. Formalisation du tracking et structuration de la gestion des réseaux sociaux pour asseoir l'identité premium sur LinkedIn.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="timeline-header">
+                        <span class="timeline-year">2024</span>
+                        <span class="timeline-phase">Phase de Performance & Partenariats</span>
+                    </div>
+                    <p>Orientation vers la visibilité à fort impact. Orchestration de partenariats média stratégiques (Paris ZigZag, Le Bonbon), automatisation du lead nurturing et affinement du tunnel de conversion pour transformer les visiteurs en membres actifs.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="timeline-header">
+                        <span class="timeline-year">2025</span>
+                        <span class="timeline-phase">Phase d'Optimisation & Expertise</span>
+                    </div>
+                    <p>Accent mis sur la rentabilité via le renforcement SEO/SEA et l'optimisation des coûts (externalisation graphique rigoureuse). Diversification des thématiques de contenu pour maintenir le positionnement SERP et approfondissement de l'approche de fidélisation.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-card">
+                    <div class="timeline-header">
+                        <span class="timeline-year">2026</span>
+                        <span class="timeline-phase">Phase d'Automatisation & Conversion</span>
+                    </div>
+                    <p>Virage vers l'excellence technologique : lancement du nouveau site web (tunnel de réservation automatisé, UX optimisée), déploiement poussé de Plezi pour le lead nurturing, et mise en place d'une stratégie de marketing de proximité pour les sites Voltaire et Pasteur.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FORCES TRANSVERSALES -->
+        <div class="theme-label">⚡ Forces transversales</div>
+        <div class="forces-grid">
+
+            <div class="force-card">
+                <div class="force-icon">📊</div>
+                <h3>Maîtrise de la Data & ROI</h3>
+                <p>Mise en place du tracking complet des sources de revenus marketing — permettant de visualiser le CA généré par chaque euro investi et de piloter le budget avec précision.</p>
+            </div>
+
+            <div class="force-card">
+                <div class="force-icon">🤝</div>
+                <h3>Synergie Sales & Marketing</h3>
+                <p>Pont réel entre les deux pôles : création de supports sales, déploiement d'actions spécifiques et reprise des opérations commerciales lors de périodes critiques pour garantir la performance.</p>
+            </div>
+
+            <div class="force-card">
+                <div class="force-icon">⚙️</div>
+                <h3>Agilité Opérationnelle</h3>
+                <p>Recrutement et intégration de Laurie. Lors de son départ, absorption de la production graphique interne pour garantir qu'aucun projet ne soit ralenti.</p>
+            </div>
+
+            <div class="force-card">
+                <div class="force-icon">🎬</div>
+                <h3>Impact Événementiel & Image</h3>
+                <p>Organisation et animation de la soirée brokers, réalisation de la vidéo de marque — des outils intégrés aujourd'hui au cœur du discours de vente.</p>
+            </div>
+
+            <div class="force-card">
+                <div class="force-icon">💰</div>
+                <h3>Optimisation des Coûts</h3>
+                <p>Reprise et négociation de l'intégralité des contrats prestataires depuis l'arrivée, assurant une meilleure maîtrise des coûts tout en maintenant la qualité des services.</p>
+            </div>
+
+        </div>
+
+        <!-- HORS DESKOPOLITAN -->
+        <div class="theme-label">🎓 Au-delà de Deskopolitan</div>
+        <div class="forces-grid">
+
+            <div class="force-card">
+                <div class="force-icon">🏫</div>
+                <h3>Intervenant – Marketing Digital</h3>
+                <p>Création et application de cursus pédagogiques pour 12 classes de Bachelor et 4 de Master au CMH. Conférencier à la Skema Business School. Formateur LinkedIn en entreprise.</p>
+            </div>
+
+            <div class="force-card">
+                <div class="force-icon">🚀</div>
+                <h3>Fondateur – Agence combcom</h3>
+                <p>17 clients en contrats annuels en moins de 3 ans, dont la création d'un cursus M1 & M2 pour l'École Française, de la conception au déploiement.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="tab-content" id="tab-contact">
+        <h2 class="section-title">Me contacter</h2>
+        <div class="contact-form">
+            <div class="form-group">
+                <label>Votre nom</label>
+                <input type="text" placeholder="Jean Dupont">
+            </div>
+            <div class="form-group">
+                <label>Votre email</label>
+                <input type="email" placeholder="jean@exemple.com">
+            </div>
+            <div class="form-group">
+                <label>Objet</label>
+                <input type="text" placeholder="Opportunité professionnelle, collaboration...">
+            </div>
+            <div class="form-group">
+                <label>Message</label>
+                <textarea placeholder="Votre message..."></textarea>
+            </div>
+            <button class="submit-btn" id="submit-btn">Envoyer le message</button>
+            <div id="form-success">✅ Message envoyé ! Je vous répondrai rapidement.</div>
+        </div>
+    </div>
+
+</main>
+
+<script>
+    // Dark mode
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme-cv') || 'light';
+    applyTheme(saved);
+
+    toggle.addEventListener('click', () => {
+        const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+        localStorage.setItem('theme-cv', next);
+    });
+
+    function applyTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        toggle.textContent = theme === 'dark' ? '☀️ Light mode' : '🌙 Dark mode';
+    }
+
+    // Onglets
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+            if (btn.dataset.tab === 'skills') animateSkills();
+        });
+    });
+
+    // Barres de compétences animées
+    function animateSkills() {
+        document.querySelectorAll('.skill-fill').forEach(bar => {
+            bar.style.width = bar.dataset.level + '%';
+        });
+    }
+
+    // Formulaire
+    document.getElementById('submit-btn').addEventListener('click', () => {
+        document.getElementById('form-success').style.display = 'block';
+        document.getElementById('submit-btn').style.display = 'none';
+    });
+</script>
+
+</body>
+</html>
